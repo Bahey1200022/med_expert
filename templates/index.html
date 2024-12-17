@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Expert System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #section1 {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 1000px; /* Increased max-width */
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .container > div:first-child {
+            border-right: 2px solid #ddd;
+            padding-right: 10px;
+        }
+        .container > div {
+            padding-left: 10px;
+        }
+        #h1 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #titles, #titles1 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        input[type="file"] {
+            margin-bottom: 20px;
+        }
+        img {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 5px;
+            background-color: #fff;
+            width: 512px; /* Increased width */
+            height: 512px; /* Increased height */
+        }
+        hr {
+            border: none;
+            border-top: 2px solid #ddd;
+            margin: 20px 0;
+        }
+        #sys{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        form {
+            max-width: 600px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .question label {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #results {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 15px;
+            background: #eaf4ff;
+            border-radius: 8px;
+            color: #004085;
+            font-size: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div id="section1">
+        <div id="titles1">
+            <h2>Brain Hemorrhage Detection Support</h2>
+        </div>
+        <div id="h1">
+            <label for="img1">Select the image:</label>
+            <input type="file" id="img1" name="img1" accept=".jpeg, .jpg, .png">
+            <div class="container">
+                <div>
+                    <img id="originalimg1">
+                </div>
+                <div id="prediction">
+                    <img id="originalimg2">
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div id="h2">
+            <div id="sys">
+                <div id="titles">
+                    <h2>Brain Hemorrhage Expert System</h2>
+                </div>
+                <form id="symptomForm">
+                    <div class="question">
+                        <label for="headache">severe headache?</label>
+                        <select id="headache" name="headache">
+                            <option value="none">None</option>
+                            <option value="mild">Mild</option>
+                            <option value="severe">Severe</option>
+                        </select>
+                    </div>
+            
+                    <div class="question">
+                        <label for="vomiting">vomiting?</label>
+                        <select id="vomiting" name="vomiting">
+                            <option value="false">No</option>
+                            <option value="true">Yes</option>
+                        </select>
+                    </div>
+            
+                    <div class="question">
+                        <label for="loss_of_consciousness">loss of consciousness?</label>
+                        <select id="loss_of_consciousness" name="loss_of_consciousness">
+                            <option value="false">No</option>
+                            <option value="true">Yes</option>
+                        </select>
+                    </div>
+                    <div class="question">
+                        <label for="pupil_response">pupil response abnormal?</label>
+                        <select id="pupil_response" name="pupil_response">
+                            <option value="normal">Normal</option>
+                            <option value="abnormal">Abnormal</option>
+                        </select>
+                    </div>
+            
+                    <div class="question">
+                        <label for="weakness">experiencing sudden weakness or paralysis?</label>
+                        <select id="weakness" name="weakness">
+                            <option value="none">None</option>
+                            <option value="sudden">Sudden</option>
+                        </select>
+                    </div>
+
+                    <div class="question">
+                        <label for="vision_changes">Sudden vision changes?</label>
+                        <select id="vision_changes" name="vision_changes">
+                            <option value="none">None</option>
+                            <option value="sudden">Sudden</option>
+                        </select>
+                    </div>
+            
+                    <div class="question">
+                        <label for="speech_difficulty">Difficulty speaking or understanding speech?</label>
+                        <select id="speech_difficulty" name="speech_difficulty">
+                            <option value="false">No</option>
+                            <option value="true">Yes</option>
+                        </select>
+                    </div>
+            
+                    <div class="question">
+                        <label for="seizures">Have you experienced seizures?</label>
+                        <select id="seizures" name="seizures">
+                            <option value="false">No</option>
+                            <option value="true">Yes</option>
+                        </select>
+                    </div>
+
+                    <div class="question">
+                        <label for="neck_pain">Severe neck pain?</label>
+                        <select id="neck_pain" name="neck_pain">
+                            <option value="none">None</option>
+                            <option value="mild">Mild</option>
+                            <option value="severe">Severe</option>
+                        </select>
+                    </div>
+            
+                    <div class="question">
+                        <label for="mental_status">Altered mental status (confusion, drowsiness)?</label>
+                        <select id="mental_status" name="mental_status">
+                            <option value="false">No</option>
+                            <option value="true">Yes</option>
+                        </select>
+                    </div>
+            
+                    <div class="question">
+                        <label for="blood_pressure">Is your blood pressure elevated?</label>
+                        <select id="blood_pressure" name="blood_pressure">
+                            <option value="normal">Normal</option>
+                            <option value="high">High</option>
+                        </select>
+                    </div>
+            
+            
+            
+                    <button type="button" onclick="submitForm()">Submit</button>
+                </form>
+            
+                <h2>Results:</h2>
+                <div id="results"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var div1 = document.getElementById('originalimg1');
+        var img1 = document.getElementById('img1');
+        var prediction = document.getElementById('originalimg2');
+
+        img1.addEventListener('change', function (event) {
+            // Get the selected file
+            div1.setAttribute('src', '');
+            prediction.setAttribute('src', '');
+
+            var file = event.target.files[0];
+            var reader = new FileReader();
+            reader.onload = function (event) {
+                div1.src = event.target.result;
+
+                // Send the data URL to the Flask server using an AJAX request
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '/upload', true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                        if (xhr.status === 200) {
+                            // Request succeeded
+                            var response = JSON.parse(xhr.responseText);
+                            var imageData = response.image_data;
+
+                            // Display the image
+                            prediction.src = 'data:image/png;base64,' + imageData;
+                        } else {
+                            // Request failed
+                            console.error('Request failed with status:', xhr.status);
+                        }
+                    }
+                };
+
+                xhr.send(JSON.stringify({ image_data: event.target.result }));
+            };
+            reader.readAsDataURL(file);
+        });
+        function submitForm() {
+            // Collect form data
+            const form = document.getElementById('symptomForm');
+            const symptoms = {
+                headache: form.headache.value,
+                vomiting: form.vomiting.value === 'true',
+                loss_of_consciousness: form.loss_of_consciousness.value === 'true',
+                pupil_response: form.pupil_response.value,
+                weakness: form.weakness.value,
+                vision_changes: form.vision_changes.value,
+                speech_difficulty: form.speech_difficulty.value === 'true',
+                seizures: form.seizures.value === 'true',
+                neck_pain: form.neck_pain.value,
+                mental_status: form.mental_status.value === 'true',
+                blood_pressure: form.blood_pressure.value
+            };
+
+            // Process results
+            let diagnosis = "No brain hemorrhage detected based on current symptoms.";
+            if (symptoms.headache === 'severe' && symptoms.vomiting) {
+                diagnosis = "High likelihood of brain hemorrhage.";
+            } else if (symptoms.loss_of_consciousness) {
+                diagnosis = "High likelihood of brain hemorrhage.";
+            } else if (symptoms.pupil_response === 'abnormal') {
+                diagnosis = "Potential brain hemorrhage; further testing required.";
+            } else if (symptoms.weakness === 'sudden') {
+                diagnosis = "Possible stroke or hemorrhage; immediate attention needed.";
+            } else if (symptoms.vision_changes === 'sudden') {
+                diagnosis = "Vision changes detected; further investigation required.";
+            } else if (symptoms.speech_difficulty) {
+                diagnosis = "Difficulty in speech; possible neurological issue.";
+            } else if (symptoms.seizures) {
+                diagnosis = "Seizures detected; further evaluation required.";
+            } else if (symptoms.neck_pain === 'severe') {
+                diagnosis = "Severe neck pain detected; further testing needed.";
+            } else if (symptoms.mental_status) {
+                diagnosis = "Altered mental status detected; immediate attention required.";
+            } else if (symptoms.blood_pressure === 'high') {
+                diagnosis = "High blood pressure detected; possible risk factor for hemorrhage.";
+            }
+
+
+            // Display results
+            document.getElementById('results').innerText = diagnosis;
+        }
+    </script>
+</body>
+</html>
